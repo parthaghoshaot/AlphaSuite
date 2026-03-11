@@ -9,10 +9,10 @@ This module provides:
   - Use an LLM to create a narrative technical analysis report.
 """
 from typing import Union
+from click import prompt
 import pandas as pd
 import talib as ta  
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_core.prompts import PromptTemplate
 import numpy as np
 import logging
 
@@ -393,7 +393,7 @@ Analysis should be data-driven and avoid predictions of future price movements. 
                 template=technical_analysis_prompt,
             )
 
-            chain = LLMChain(llm=llm, prompt=prompt_template)
+            chain = prompt_template | llm
             technical_analysis_results = chain.run(
                 ticker=ticker,
                 analysis_date=analysis_date,  

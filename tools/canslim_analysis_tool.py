@@ -4,8 +4,8 @@ import os
 import traceback
 from typing import Any, Dict, List, Tuple
 
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
+#from langchain.chains import LLMChain
+from langchain_core.prompts import PromptTemplate
 from markdown_pdf import MarkdownPdf, Section
 from sqlalchemy import func
 
@@ -299,7 +299,7 @@ class CanslimReportGenerator:
                 template=self._INDUSTRY_ANALYSIS_PROMPT_TEMPLATE,
                 input_variables=["ticker", "company_info", "main_ticker_metrics_md", "competitor_metrics_md"]
             )
-            chain = LLMChain(llm=self.llm, prompt=prompt)
+            chain = prompt | self.llm
             analysis = chain.run(
                 ticker=ticker,
                 company_info=str(company_info),
@@ -330,7 +330,7 @@ class CanslimReportGenerator:
                 template=self._LLM_PROMPT_TEMPLATE,
                 input_variables=["ticker", "company_info", "company_news", "market_posture", "industry_analysis_summary", "canslim_metrics_md"]
             )
-            chain = LLMChain(llm=self.llm, prompt=prompt)
+            chain = prompt | self.llm
 
             summary = chain.run(
                 ticker=ticker,

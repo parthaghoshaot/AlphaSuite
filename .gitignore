@@ -42,3 +42,5 @@ venv/
 /work/
 # Ignore log files
 *.log
+
+db_data/

@@ -30,6 +30,7 @@ langchain-google-genai
 google-generativeai
 textblob
 vaderSentiment
+langchain-community
 
 # Utilities
 python-dotenv

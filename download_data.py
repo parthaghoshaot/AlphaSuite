@@ -79,12 +79,12 @@ def initialize_database():
 def run_daily_pipeline():
     """
     Runs the full daily pipeline:
-    1. Updates prices for CA and US markets.
+    1. Updates prices for IN and US markets.
     2. Recalculates common scanner values.
     """
     logger.info("--- Starting Daily Data & Scan Pipeline ---")
 
-    markets = ['ca', 'us']
+    markets = ['in', 'us']
 
     for market in markets:
         logger.info(f"--- Processing {market.upper()} Market ---")
@@ -98,6 +98,7 @@ def run_daily_pipeline():
 
 def run_full_download(market, exchange, quote_types, ticker_file, batch_size, start_date, end_date, existing_tickers_action, update_prices_action):
     """Wraps the main save_or_update_company_data function to be callable."""
+    market = "in"
     logger.info(f"--- Starting Full Download/Update for market: {market} ---")
     # The main function already has extensive logging, so we just call it.
     save_or_update_company_data(
@@ -280,7 +281,7 @@ def main():
     parser_download = subparsers.add_parser('download', help='Run a full download or update of company and price data.')
     add_common_download_args(parser_download)
     parser_download.add_argument("--ticker_file", type=str, help="File with tickers.", default="yhallsym.json")
-    parser_download.add_argument("--start_date", type=str, help="Start date (YYYY-MM-DD).", default="2000-01-01")
+    parser_download.add_argument("--start_date", type=str, help="Start date (YYYY-MM-DD).", default="2015-01-01")
     parser_download.add_argument("--end_date", type=str, help="End date (YYYY-MM-DD).", default=None)
     parser_download.add_argument("--existing_tickers_action", type=str, help="Action for existing tickers.", default="skip")
     parser_download.add_argument("--update_prices_action", type=str, help="Action for updating prices.", default='yes')

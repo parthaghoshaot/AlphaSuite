@@ -1,0 +1,21 @@
+##Start postgress
+
+pg_ctl -D ./db_data -l logfile start
+
+##Stop postgress
+
+pg_ctl -D ./db_data stop
+
+
+##login
+psql -d alphasuite -U admin_user -W
+
+###user details
+admin_user
+my_pass
+
+
+psql -d alphasuite
+
+ALTER SCHEMA public OWNER TO admin_user;
+ALTER SCHEMA alphasuite OWNER TO admin_user;
